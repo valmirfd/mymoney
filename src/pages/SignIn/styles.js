@@ -5,7 +5,7 @@ export const Scrollar = styled.ScrollView`
     background-color: #76E6DA;
 `;
 
-export const Container = styled.View`
+export const Container = styled.KeyboardAvoidingView`
     flex: 1;
     align-items: center;
     justify-content: center;

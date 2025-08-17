@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { Platform } from "react-native";
 
 import {
     Scrollar,
@@ -13,10 +13,19 @@ import {
     LinkText,
 } from './styles';
 
+import { useNavigation } from "@react-navigation/native";
+
+
 export default function SignIn() {
+    const navigation = useNavigation();
+
+
     return (
         <Scrollar showsVerticalScrollIndicator={false}>
-            <Container>
+            <Container
+                behavior={Platform.OS === 'ios' ? 'padding' : ''}
+                enabled
+            >
                 <Logo
                     source={require("../../assets/logo.jpg")}
                     alt="Logo do app"
@@ -33,11 +42,11 @@ export default function SignIn() {
                     />
                 </AreaInput>
 
-                <SubmitButton>
+                <SubmitButton activeOpacity={0.8}>
                     <SubmitText>Login</SubmitText>
                 </SubmitButton>
 
-                <Link>
+                <Link onPress={() => navigation.navigate('SignUp')}>
                     <LinkText>Criar uma conta!</LinkText>
                 </Link>
 

@@ -19,6 +19,9 @@ function AuthRoutes() {
             <AuthStack.Screen
                 name="SignUp"
                 component={SignUp}
+                options={{
+                    headerShown: false
+                }}
             />
         </AuthStack.Navigator>
     );
