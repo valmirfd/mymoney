@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text } from "react-native";
 
 import {
-    Background,
+    Scrollar,
     Container,
     Logo,
     AreaInput,
@@ -15,10 +15,10 @@ import {
 
 export default function SignIn() {
     return (
-        <Background>
+        <Scrollar showsVerticalScrollIndicator={false}>
             <Container>
                 <Logo
-                    source={require("../../assets/Logo.png")}
+                    source={require("../../assets/logo.jpg")}
                     alt="Logo do app"
                 />
                 <AreaInput>
@@ -43,6 +43,6 @@ export default function SignIn() {
 
 
             </Container>
-        </Background>
+        </Scrollar>
     );
 }

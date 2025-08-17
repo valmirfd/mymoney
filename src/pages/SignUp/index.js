@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text } from "react-native";
 
 import {
-    Background,
+    Scrollar,
     Container,
     Logo,
     AreaInput,
@@ -15,9 +15,12 @@ import {
 
 export default function SignUp() {
     return (
-        <Background>
+        <Scrollar showsVerticalScrollIndicator={false}>
             <Container>
-
+                <Logo
+                    source={require("../../assets/logo.jpg")}
+                    alt="Logo do app"
+                />
                 <AreaInput>
                     <Input
                         placeholder="Digite seu nome"
@@ -47,11 +50,11 @@ export default function SignUp() {
                 </SubmitButton>
 
                 <Link>
-                    <LinkText>Já tenho uma conta!</LinkText>
+                    <LinkText>Já tenho conta!</LinkText>
                 </Link>
 
 
             </Container>
-        </Background>
+        </Scrollar>
     );
 }

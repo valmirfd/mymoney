@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 
-export const Background = styled.View`
+export const Scrollar = styled.ScrollView`
     flex: 1;
     background-color: #76E6DA;
 `;
@@ -13,6 +13,8 @@ export const Container = styled.View`
 
 export const Logo = styled.Image`
     margin-bottom: 25px;
+    width: 200px;
+    height: 200px;
 `;
 
 export const AreaInput = styled.View`
