@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Platform } from "react-native";
+import { Platform, ActivityIndicator } from "react-native";
 
 import {
     Scrollar,
@@ -20,13 +20,15 @@ import { AuthContext } from "../../contexts/auth";
 
 export default function SignUp() {
     const navigation = useNavigation();
-    const { signUp } = useContext(AuthContext);
+    const { signUp, loadingAuth } = useContext(AuthContext);
 
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     function handleSignUp() {
+        if (nome === '' || email === '' || password === '') return;
+
         signUp(nome, email, password);
     }
 
@@ -73,7 +75,16 @@ export default function SignUp() {
                 </AreaInput>
 
                 <SubmitButton onPress={handleSignUp}>
-                    <SubmitText>Cadastrar</SubmitText>
+
+                    {
+                        loadingAuth ? (
+                            <ActivityIndicator size={20} color="#76E6DA" />
+                        ) : (
+                            < SubmitText > Cadastrar</SubmitText>
+                        )
+                    }
+
+
                 </SubmitButton>
 
                 <Link onPress={() => navigation.navigate('SignIn')}>
@@ -82,6 +93,6 @@ export default function SignUp() {
 
 
             </Container>
-        </Scrollar>
+        </Scrollar >
     );
 }
