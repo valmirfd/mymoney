@@ -20,7 +20,7 @@ import { AuthContext } from "../../contexts/auth";
 
 export default function SignUp() {
     const navigation = useNavigation();
-    const { signUp, loadingAuth } = useContext(AuthContext);
+    const { signIn, loadingAuth } = useContext(AuthContext);
 
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
