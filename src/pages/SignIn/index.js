@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Platform } from "react-native";
+import { Platform, ActivityIndicator } from "react-native";
 
 import {
     Scrollar,
@@ -59,7 +59,16 @@ export default function SignIn() {
                 </AreaInput>
 
                 <SubmitButton activeOpacity={0.8} onPress={handleLogin}>
-                    <SubmitText>Login</SubmitText>
+
+                    {
+                        loadingAuth ? (
+                            <ActivityIndicator size={20} color="#76E6DA" />
+                        ) : (
+                            <SubmitText>Login</SubmitText>
+                        )
+                    }
+
+
                 </SubmitButton>
 
                 <Link onPress={() => navigation.navigate('SignUp')}>
