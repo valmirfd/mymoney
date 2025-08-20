@@ -8,9 +8,21 @@ import AppRoutes from "./app.routes";
 
 
 function Routes() {
-    const { signed } = useContext(AuthContext);
+    const { signed, loading } = useContext(AuthContext);
 
-    const loading = false;
+    if(loading){
+        return(
+            <View 
+            style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: '#76E6DA'
+            }}>
+                <ActivityIndicator size="large" color="#1A9B91" />
+            </View>
+        );
+    }
 
 
     return (

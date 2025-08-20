@@ -1,8 +1,9 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 
 import api from '../services/api';
 import { useNavigation } from "@react-navigation/native";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const AuthContext = createContext({});
 
@@ -11,6 +12,35 @@ function AuthProvider({ children }) {
 
     const [user, setUser] = useState(null);
     const [loadingAuth, setLoadingAuth] = useState(false);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        async function loadStorage() {
+            const storageUser = await AsyncStorage.getItem('@finToken');
+
+            if (storageUser) {
+                const response = await api.get('/me', {
+                    headers: {
+                        'Authorization': `Bearer ${storageUser}`
+                    }
+                })
+                    .catch(() => {
+                        setUser(null);
+                    })
+
+                api.defaults.headers['Authorization'] = `Bearer ${storageUser}`;
+                setUser(response.data);
+                setLoading(false);
+            }
+
+            setLoading(false);
+
+        }
+
+        loadStorage();
+
+
+    }, []);
 
 
 
@@ -55,7 +85,9 @@ function AuthProvider({ children }) {
                 token,
             };
 
+            await AsyncStorage.setItem('@finToken', token);
             api.defaults.headers['Authorization'] = `Bearer ${token}`;
+
 
             setUser({
                 id,
@@ -72,9 +104,16 @@ function AuthProvider({ children }) {
         }
     }
 
+    async function signOut() {
+        await AsyncStorage.clear()
+            .then(() => {
+                setUser(null);
+            })
+    }
+
 
     return (
-        <AuthContext.Provider value={{ signed: !!user, user, signUp, signIn, loadingAuth }}>
+        <AuthContext.Provider value={{ signed: !!user, user, signUp, signIn, signOut, loadingAuth, loading }}>
             {children}
         </AuthContext.Provider>
     );
